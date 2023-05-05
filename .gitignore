@@ -1,0 +1,9 @@
+compile_commands.json
+/Makefile
+/build
+/.cache
+
+.projectile
+.dir-locals.el
+
+renderer
