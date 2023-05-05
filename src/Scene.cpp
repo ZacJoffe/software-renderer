@@ -24,13 +24,13 @@ glm::vec2 Scene::parseScene() {
                     start_pos = glm::vec2(x, z);
                     break;
                 default: // TODO test this
-                    throw std::runtime_exception("Invalid block code");
+                    throw std::runtime_error("Invalid block code");
             }
         }
     }
 
     if (start_pos == default_start) {
-        throw std::runtime_exception("Scene must have starting block definition");
+        throw std::runtime_error("Scene must have starting block definition");
     }
 
     return start_pos;
