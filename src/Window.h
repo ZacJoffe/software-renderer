@@ -1,8 +1,9 @@
 #pragma once
-#include <SDL2/SDL.h>
+#include "Camera.h"
 #include "common.h"
 #include "Ray.h"
-#include "Camera.h"
+
+#include <SDL2/SDL.h>
 
 struct SDLContext {
     SDL_Window * window; // TODO unique ptrs

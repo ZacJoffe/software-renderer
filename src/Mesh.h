@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Ray.h"
+
 #include <glm/glm.hpp>
 
 // TODO use this with a mesh factory to create a concrete mesh type that we will use in the scene
