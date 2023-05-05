@@ -48,7 +48,7 @@ void Window::init() {
         throw std::runtime_error("Window could be not created! SDL Error: " + err);
     }
 
-    m_sdl_context.renderer = SDL_CreateRenderer(m_sdl_context.window, -1, NULL);
+    m_sdl_context.renderer = SDL_CreateRenderer(m_sdl_context.window, -1, 0);
     if (!m_sdl_context.renderer) {
         const std::string err(SDL_GetError());
         throw std::runtime_error("Renderer could not be created! SDL Error: " + err);
