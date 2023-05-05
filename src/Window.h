@@ -1,8 +1,11 @@
 #pragma once
 #include <SDL2/SDL.h>
+#include "common.h"
+#include "Ray.h"
+#include "Camera.h"
 
 struct SDLContext {
-    SDL_Window * window;
+    SDL_Window * window; // TODO unique ptrs
     SDL_Renderer * renderer;
     SDL_Event event;
 };
@@ -10,16 +13,21 @@ struct SDLContext {
 class Window {
 public:
     // TODO make this a singleton
-    Window();
+    Window(uint width, uint height);
 
     void launch();
 
 private:
     void run();
     void init();
+
     bool pollInputs(); // returns true if quit
     void appLogic();
     void draw();
 
     SDLContext m_sdl_context;
+    uint m_width;
+    uint m_height;
+
+    Camera m_camera;
 };

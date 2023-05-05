@@ -2,8 +2,9 @@
 #include <SDL2/SDL.h>
 #include <stdexcept>
 #include <string>
+#include <glm/glm.hpp>
 
-Window::Window() {}
+Window::Window(uint width, uint height) : m_width(width), m_height(height) {}
 
 void Window::launch() {
     run();
@@ -18,6 +19,7 @@ void Window::run() {
         }
 
         appLogic();
+        draw();
     }
 
     SDL_DestroyRenderer(m_sdl_context.renderer);
@@ -33,7 +35,14 @@ void Window::init() {
         throw std::runtime_error("SDL could not initialize! SDL Error: " + err);
     }
 
-    m_sdl_context.window = SDL_CreateWindow("raycaster", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+    m_sdl_context.window = SDL_CreateWindow(
+        "raycaster",
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        m_width,
+        m_height,
+        SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL
+    );
     if (!m_sdl_context.window) {
         const std::string err(SDL_GetError());
         throw std::runtime_error("Window could be not created! SDL Error: " + err);
@@ -72,6 +81,13 @@ void Window::appLogic() {
 }
 
 void Window::draw() {
-    // TODO
+    SDL_SetRenderDrawColor(m_sdl_context.renderer, 0, 0, 0, 255);
+    SDL_RenderClear(m_sdl_context.renderer);
+
+    for (uint x = 0; x < m_width; ++x) {
+        for (uint y = 0; y < m_height; ++y) {
+
+        }
+    }
 }
 
