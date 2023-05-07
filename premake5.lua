@@ -6,6 +6,7 @@ project "renderer"
     language "C++"
     location "build"
     targetdir "."
+    buildoptions { "-std=c++17" }
     files { "./src/*.cpp" }
     links { "SDL2" }
 
