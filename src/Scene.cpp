@@ -16,12 +16,12 @@ glm::vec2 Scene::parseScene() {
     for (uint z = 0; z < 10; ++z) {
         for (uint x = 0; x < 10; ++x) {
             switch (WORLD[z][x]) {
-                case None:
+                case none:
                     break;
-                case Block:
                     // TODO
+                case block:
                     break;
-                case Start:
+                case start:
                     start_pos = glm::vec2(x, z);
                     break;
                 default: // TODO test this
