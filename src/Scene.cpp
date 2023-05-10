@@ -1,15 +1,15 @@
 #include "Scene.h"
 
 #include "common.h"
+#include "materials.h"
 
+#include <memory>
 #include <stdexcept>
 
 Scene::Scene() {}
 
 // returns camera starting position
 glm::vec2 Scene::parseScene() {
-    // TODO
-
     const glm::vec2 default_start(-1, -1);
     glm::vec2 start_pos = default_start;
 
@@ -18,8 +18,8 @@ glm::vec2 Scene::parseScene() {
             switch (WORLD[z][x]) {
                 case none:
                     break;
-                    // TODO
                 case block:
+                    m_meshes.push_back(std::make_unique<Block>(glm::vec2(x, z), std::make_unique<BlueMaterial>()));
                     break;
                 case start:
                     start_pos = glm::vec2(x, z);
@@ -35,4 +35,13 @@ glm::vec2 Scene::parseScene() {
     }
 
     return start_pos;
+}
+
+// std::vector<std::unique_ptr<Mesh>> Scene::getMeshes() const {
+//     return m_meshes;
+// }
+
+void Scene::draw(const SDLContext & sdl_context, const std::unique_ptr<Camera> & camera) {
+    // TODO replace hardcoded resolution
+    camera->castRays(sdl_context, 640, 480, m_meshes);
 }

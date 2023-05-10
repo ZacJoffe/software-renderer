@@ -2,13 +2,16 @@
 
 #include "common.h"
 #include "Mesh.h"
+#include "Camera.h"
+#include "SDLContext.h"
 
 #include <glm/glm.hpp>
+#include <memory>
 #include <vector>
 
 // TODO refactor this into a file
 // TODO this should be much bigger
-static const uint WORLD[10][10] = {
+static constexpr uint WORLD[10][10] = {
     /*
        x--->
     z
@@ -34,7 +37,9 @@ public:
     Scene();
 
     glm::vec2 parseScene();
+    // std::vector<std::unique_ptr<Mesh>> getMeshes() const;
+    void draw(const SDLContext & sdl_context, const std::unique_ptr<Camera> & camera);
 
 private:
-    std::vector<Mesh> m_meshes;
+    std::vector<std::unique_ptr<Mesh>> m_meshes;
 };

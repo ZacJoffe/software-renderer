@@ -1,8 +1,11 @@
 #pragma once
 
 #include "Ray.h"
+#include "materials.h"
 
 #include <glm/glm.hpp>
+#include <optional>
+#include <memory>
 
 // TODO use this with a mesh factory to create a concrete mesh type that we will use in the scene
 enum MeshType {
@@ -12,15 +15,15 @@ enum MeshType {
 };
 
 struct Mesh {
-    virtual bool testCollision(const Ray & ray) const = 0;
+    std::unique_ptr<Material> material;
+    virtual std::optional<float> testIntersection(const Ray & ray) const = 0;
 };
 
 class Block : public Mesh {
 public:
-    Block(const glm::vec2 & pos);
+    Block(const glm::vec2 & pos, const std::unique_ptr<Material> & material);
 
-    // TODO https://gamedev.stackexchange.com/questions/18436/most-efficient-aabb-vs-ray-collision-algorithms
-    bool testCollision(const Ray & ray) const override;
+    std::optional<float> testIntersection(const Ray & ray) const override;
 
 private:
     // glm::vec3 m_pos; // center?

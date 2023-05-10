@@ -2,14 +2,10 @@
 #include "Camera.h"
 #include "common.h"
 #include "Ray.h"
+#include "Scene.h"
+#include "SDLContext.h"
 
-#include <SDL2/SDL.h>
-
-struct SDLContext {
-    SDL_Window * window; // TODO unique ptrs
-    SDL_Renderer * renderer;
-    SDL_Event event;
-};
+#include <memory>
 
 class Window {
 public:
@@ -20,7 +16,8 @@ public:
 
 private:
     void run();
-    void init();
+    void initSDL();
+    void initWorld();
 
     bool pollInputs(); // returns true if quit
     void appLogic();
@@ -30,5 +27,6 @@ private:
     uint m_width;
     uint m_height;
 
-    Camera m_camera;
+    std::unique_ptr<Camera> m_camera;
+    std::unique_ptr<Scene> m_scene;
 };
